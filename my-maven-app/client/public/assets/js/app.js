@@ -1,4 +1,7 @@
-document.getElementById('dataForm').addEventListener('submit', async function (e) {
+const fs = require('fs');
+const path = require('path');
+
+document.getElementById('dataForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const name = document.getElementById('name').value;
@@ -7,60 +10,44 @@ document.getElementById('dataForm').addEventListener('submit', async function (e
 
     const data = { name, weight, mood, timestamp: new Date().toISOString() };
 
-    if (isWindows()) {
-        const filePath = await saveToWindowsRoaming(data);
-        alert(`Data saved to: ${filePath}`);
-    } else {
-        alert('This feature is only supported on Windows.');
-    }
+    saveDataLocally(data);
+    alert('Data saved successfully!');
 });
 
-document.getElementById('searchButton').addEventListener('click', async function () {
+document.getElementById('searchButton').addEventListener('click', function () {
     const searchName = document.getElementById('searchName').value;
+    const result = searchDataLocally(searchName);
 
-    if (isWindows()) {
-        const result = await searchInWindowsRoaming(searchName);
-        document.getElementById('searchResult').innerText = result
-            ? JSON.stringify(result, null, 2)
-            : 'No data found for the given name.';
-    } else {
-        alert('This feature is only supported on Windows.');
-    }
+    document.getElementById('searchResult').innerText = result
+        ? JSON.stringify(result, null, 2)
+        : 'No data found for the given name.';
 });
 
-function isWindows() {
-    return navigator.platform.indexOf('Win') > -1;
-}
+function saveDataLocally(data) {
+    const filePath = path.join(__dirname, 'data', 'data.json');
 
-async function saveToWindowsRoaming(data) {
-    const { app } = require('electron').remote;
-    const fs = require('fs');
-    const path = require('path');
-
-    const roamingPath = path.join(app.getPath('appData'), 'EvolvingME');
-    if (!fs.existsSync(roamingPath)) {
-        fs.mkdirSync(roamingPath);
+    // Erstelle den Ordner, falls er nicht existiert
+    if (!fs.existsSync(path.dirname(filePath))) {
+        fs.mkdirSync(path.dirname(filePath), { recursive: true });
     }
 
-    const filePath = path.join(roamingPath, 'data.json');
     let existingData = [];
 
+    // Lese bestehende Daten, falls die Datei existiert
     if (fs.existsSync(filePath)) {
         existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
     }
 
+    // Füge die neuen Daten hinzu
     existingData.push(data);
-    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
 
-    return filePath;
+    // Schreibe die Daten zurück in die Datei
+    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
 }
 
-async function searchInWindowsRoaming(name) {
-    const { app } = require('electron').remote;
-    const fs = require('fs');
-    const path = require('path');
+function searchDataLocally(name) {
+    const filePath = path.join(__dirname, 'data', 'data.json');
 
-    const filePath = path.join(app.getPath('appData'), 'EvolvingME', 'data.json');
     if (!fs.existsSync(filePath)) {
         return null;
     }
