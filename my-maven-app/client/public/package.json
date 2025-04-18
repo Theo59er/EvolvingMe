@@ -1,0 +1,7 @@
+{
+  "name": "evolvingme",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
+}
