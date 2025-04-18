@@ -6,81 +6,107 @@
 
 Die Vision von **EvolvingMe** ist es, eine zentrale Plattform zu schaffen, die alle Aspekte der persönlichen Entwicklung abdeckt. Die App soll dir helfen, deine Ziele zu setzen, Fortschritte zu dokumentieren und wertvolle Einblicke in dein Leben zu gewinnen. 
 
-In Zukunft wird die App folgende Bereiche unterstützen:
-- **Fitness** 💪: Verfolge dein Gewicht, deine Workouts und deine körperliche Entwicklung.
-- **Psyche** 🧠: Dokumentiere deine Stimmung, reflektiere deine Gedanken und verbessere dein mentales Wohlbefinden.
-- **Ernährung** 🥗: Halte deine Mahlzeiten fest, plane deine Ernährung und analysiere deine Essgewohnheiten.
-- **Verhalten** 📝: Beobachte deine täglichen Routinen, identifiziere Muster und arbeite an positiven Veränderungen.
+### Kernbereiche 🎯
+- **Fitness** 💪: Verfolge dein Gewicht, deine Workouts und deine körperliche Entwicklung
+- **Psyche** 🧠: Dokumentiere deine Stimmung und reflektiere deine Gedanken
+- **Ernährung** 🥗: Analysiere deine Essgewohnheiten und plane gesunde Mahlzeiten
+- **Verhalten** 📝: Identifiziere Muster und arbeite an positiven Veränderungen
 
 ## Aktueller Stand 📊
 
-Derzeit besteht die Anwendung aus zwei Hauptkomponenten:
-1. **Server** 🖥️: Ein Java-basierter Server, der die Daten verarbeitet und speichert.
-2. **Client** 🌐: Eine PHP- und JavaScript-basierte Webanwendung, die eine benutzerfreundliche Oberfläche bietet.
+Die App besteht aus einer PHP-basierten Webanwendung mit folgenden Features:
 
-## Features (Geplant und Aktuell) ✨
+### Aktuelle Features ✨
+- **Datenerfassung** 📝
+  - Name, Gewicht, Stimmung und detaillierte Tagesnotizen
+  - Strukturierte Eingabefelder für bessere Analyse
+  - Automatische Datenspeicherung pro Benutzer
 
-### Aktuelle Features
-- Einfache Eingabe von Daten wie Gewicht und Stimmung 📝
-- Speicherung der Daten lokal in einer JSON-Datei 💾
-- KI-Analyse deiner Fortschritte mit ChatGPT Integration 🤖
-- Benutzerfreundliche Suche nach Namen 🔍
-- Dunkles Design mit anpassbarem Hintergrund 🎨
-- Verlaufsanalyse mit vorherigen Einträgen 📈
+- **KI-Integration** 🤖
+  - Fortschrittsanalyse durch ChatGPT
+  - Personalisierte Empfehlungen
+  - Verlaufsbasierte Einsichten
+  - Aufklappbare KI-Analysen mit Effekten
 
-### Geplante Features
-- Erweiterte KI-Analysen und Empfehlungen 🧠
-- Diagramme zur Visualisierung von Fortschritten 📊
-- Mobile App-Version für iOS und Android 📱
+- **Benutzerfreundlichkeit** 🎨
+  - Modernes Interface mit Glasmorphismus-Design
+  - Dunkelmodus-Option
+  - Responsive Layout
+  - Animierte UI-Elemente
+
+- **Datenverwaltung** 💾
+  - Separate JSON-Dateien pro Benutzer
+  - Verlaufsansicht mit Filteroptionen
+  - Kopier-Funktionen für Prompts und Daten
+
+### Geplante Features 🔮
+- Diagramme zur Visualisierung 📊
+- Mobile App für iOS/Android 📱
 - Cloud-Synchronisation ☁️
 - Erinnerungsfunktion 🔔
+- Erweiterte KI-Analysen 🧠
 
 ## Installation 🛠️
 
 ### Voraussetzungen
-- **Node.js** 📦 (mit npm) - [Download](https://nodejs.org/)
-- **PHP 8.4+** 🐘 - [Download](https://windows.php.net/download#php-8.4)
-- **Electron** ⚡ für die Desktop-Anwendung
-- **Java 17+** ☕ (optional für Server)
+- **PHP 8.4+** 🐘
+- **Node.js & npm** 📦
+- **Electron** ⚡
+- **Webbrowser** 🌐
 
-### PHP Installation (Windows) 🐘
+### Schnellstart
 
-1. **Download PHP** 📥
-   - Gehe zu [windows.php.net/download#php-8.4](https://windows.php.net/download#php-8.4)
-   - Wähle "VS16 x64 Thread Safe" ZIP-Paket
-   - Lade die ZIP-Datei herunter
+1. **Repo klonen**
+```bash
+git clone https://github.com/yourusername/EvolvingMe.git
+cd EvolvingMe
+```
 
-2. **PHP Einrichtung** 📂
-   ```bash
-   # Erstelle PHP-Ordner
-   mkdir C:\php
-   # Entpacke ZIP-Datei nach C:\php
-   ```
+2. **PHP installieren**
+```bash
+# Windows (mit Scoop)
+scoop install php
 
-## Nutzung
-- Öffne die Electron-Anwendung.
-- Gib Daten wie Name, Gewicht und Stimmung ein und speichere sie.
-- Suche nach gespeicherten Daten basierend auf dem Namen.
-- Die Daten werden lokal in einer JSON-Datei gespeichert.
+# Oder manuell von php.net herunterladen
+```
 
-## Fehlerbehebung
+3. **Abhängigkeiten installieren**
+```bash
+cd my-maven-app/client/public
+npm install
+```
 
-### Häufige Probleme
-1. **`php` wird nicht erkannt**:
-   - Stelle sicher, dass PHP korrekt installiert ist und in der Umgebungsvariable `PATH` verfügbar ist.
-2. **Electron lädt `index.php` nicht**:
-   - Stelle sicher, dass der PHP-Server läuft und die Datei `main.js` korrekt konfiguriert ist.
-3. **Fehler beim Starten von `npm start`**:
-   - Überprüfe, ob die Datei `package.json` im Client-Verzeichnis vorhanden ist und ein gültiges `start`-Skript enthält.
+4. **Anwendung starten**
+```bash
+npm start
+```
 
-### Debugging
-- Öffne die Entwicklerkonsole in Electron (F12), um Fehler im JavaScript-Code zu überprüfen.
-- Überprüfe die Logs des PHP-Servers und von Electron im Terminal.
+## Nutzung 📱
 
-## Contributing
+1. **Daten erfassen**
+   - Name und Messwerte eingeben
+   - Tagesnotizen strukturiert erfassen
+   - Speichern und Fortschritt verfolgen
 
-Contributions sind willkommen! Bitte fühle dich frei, Pull Requests einzureichen oder Issues zu erstellen, um Vorschläge oder Verbesserungen zu teilen.
+2. **KI-Analyse**
+   - Nach Namen suchen
+   - "Prompt kopieren" für ChatGPT
+   - Analyse einfügen und speichern
 
-## License
+3. **Fortschritt tracken**
+   - Verlauf anzeigen
+   - KI-Empfehlungen lesen
+   - Entwicklung beobachten
 
-Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die Datei `LICENSE` für weitere Details.
+## Contributing 🤝
+
+Beiträge sind willkommen! Bitte beachte:
+1. Fork das Projekt
+2. Erstelle einen Feature Branch
+3. Committe deine Änderungen
+4. Push zu dem Branch
+5. Öffne einen Pull Request
+
+## Lizenz 📄
+
+Dieses Projekt ist unter der MIT-Lizenz lizenziert. Details in der `LICENSE`-Datei.
