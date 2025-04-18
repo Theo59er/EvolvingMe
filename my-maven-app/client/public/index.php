@@ -1,3 +1,7 @@
+<?php
+// Set timezone to Berlin
+date_default_timezone_set('Europe/Berlin');
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -17,26 +21,45 @@
         .section {
             margin: 20px 0;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #333;
             border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.9); /* Leicht transparenter Hintergrund */
-            backdrop-filter: blur(5px); /* Verschwommener Effekt */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, 
+                rgba(20, 20, 20, 0.9),
+                rgba(70, 70, 70, 0.8),
+                rgba(20, 20, 20, 0.9));
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .copy-button {
             background: #4CAF50;
             color: white;
-            padding: 10px;
+            padding: 10px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
+
+        .copy-button:hover {
+            background: #45a049;
+        }
+
+        .copy-button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
         .ai-feedback {
-            background: #f5f5f5;
+            background: linear-gradient(45deg, 
+                rgba(20, 20, 20, 0.9),
+                rgba(70, 70, 70, 0.8),
+                rgba(20, 20, 20, 0.9));
             padding: 15px;
             margin: 10px 0;
             border-left: 4px solid #4CAF50;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .collapsible {
@@ -70,7 +93,11 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            background-color: #f9f9f9;
+            background: linear-gradient(45deg, 
+                rgba(20, 20, 20, 0.9),
+                rgba(70, 70, 70, 0.8),
+                rgba(20, 20, 20, 0.9));
+            color: rgba(255, 255, 255, 0.8);
             border-radius: 0 0 4px 4px;
         }
 
@@ -118,9 +145,12 @@
         .cell-content.expanded {
             max-height: 1000px;
             filter: blur(0) grayscale(0%) contrast(100%);
-            background: white;
+            background: linear-gradient(45deg, 
+                rgba(20, 20, 20, 0.9),
+                rgba(70, 70, 70, 0.8),
+                rgba(20, 20, 20, 0.9));
             animation: none;
-            color: black;
+            color: rgba(255, 255, 255, 0.8);
             text-shadow: none;
         }
 
@@ -149,44 +179,40 @@
             }
         }
 
-        @keyframes twinkle {
-            0% { 
-                transform: translate(20%, 20%) scale(0.2);
-                opacity: 0;
-                filter: brightness(100%);
-            }
-            50% { 
-                transform: translate(50%, 50%) scale(1);
-                opacity: 1;
-                filter: brightness(200%);
-            }
-            100% { 
-                transform: translate(80%, 80%) scale(0.2);
-                opacity: 0;
-                filter: brightness(100%);
-            }
+        /* Zusätzliche Anpassungen für bessere Lesbarkeit */
+        input, textarea {
+            background-color: rgba(40, 40, 40, 0.9);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #444;
         }
 
-        .star {
-            position: fixed;
-            pointer-events: none;
+        table {
+            background-color: rgba(30, 30, 30, 0.9);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        td, th {
+            border-color: #444;
+        }
+
+        .lm-studio-button {
+            background: #2196F3;
             color: white;
-            text-shadow: 0 0 10px #fff,
-                         0 0 20px #fff,
-                         0 0 30px #fff;
-            animation: fallingStar 1s linear forwards;
-            z-index: 1000;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
         }
 
-        @keyframes fallingStar {
-            0% {
-                transform: translateY(0) scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100px) scale(0.1);
-                opacity: 0;
-            }
+        .lm-studio-button:hover {
+            background: #1976D2;
+        }
+
+        .lm-studio-error {
+            color: #ff4444;
+            font-size: 0.9em;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -210,7 +236,10 @@
 - Aktivitäten: Was hast du unternommen?
 - Gefühl: Wie fühlst du sich dabei?" rows="6" cols="50"></textarea><br><br>
 
-            <input type="submit" value="Speichern">
+            <input type="submit" value="Speichern" class="copy-button">
+            <button type="button" onclick="saveWithAnalysis(event)" class="copy-button" style="margin-left: 10px;">
+                Speichern + KI Analyse
+            </button>
         </form>
     </div>
 
@@ -306,7 +335,9 @@
                     echo "<form action='update_ai_analysis.php' method='POST'>";
                     echo "<input type='hidden' name='name' value='" . htmlspecialchars($searchName) . "'>";
                     echo "<textarea name='ai_analysis' rows='10' cols='50' placeholder='Fügen Sie hier die neue KI-Analyse ein...'></textarea><br><br>";
+                    echo "<input type='hidden' class='analysis-prompt' value='" . htmlspecialchars($lastEntry['analysis_prompt']) . "'>";
                     echo "<input type='submit' value='KI-Analyse speichern' class='copy-button'>";
+                    echo "<button type='button' class='lm-studio-button' onclick='getLMStudioAnalysis()'>LM Studio Analyse</button>";
                     echo "</form>";
                     echo "</div>";
 
@@ -340,6 +371,9 @@
                         'ai_history' => $aiData ?? []
                     ];
                     echo "<button class='copy-button' onclick='copyToClipboard(`" . htmlspecialchars(json_encode($combinedData, JSON_PRETTY_PRINT)) . "`)'>JSON kopieren</button>";
+
+                    // LM Studio Analyse Button
+                    echo "<button class='lm-studio-button' onclick='getLMStudioAnalysis()'>LM Studio Analyse</button>";
                 }
             } else {
                 echo "<p>Keine Daten für diesen Benutzer gefunden.</p>";
@@ -384,33 +418,96 @@
         }
     });
 
-    // Sterne-Generator Funktion
-    function createStar(e) {
-        if (e.target.closest('.collapsible-cell')) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = e.clientX + 'px';
-            star.style.top = e.clientY + 'px';
-            star.textContent = ['✦', '✧', '⋆', '✫'][Math.floor(Math.random() * 4)];
-            document.body.appendChild(star);
-
-            // Entferne Stern nach Animation
-            setTimeout(() => {
-                star.remove();
-            }, 1000);
+    async function saveWithAnalysis(event) {
+        event.preventDefault();
+        
+        // Get form data
+        const form = document.querySelector('form[action="save_data.php"]');
+        const formData = new FormData(form);
+        
+        try {
+            // First save the data
+            const saveResponse = await fetch('save_data.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (!saveResponse.ok) {
+                throw new Error('Fehler beim Speichern der Daten');
+            }
+            
+            // Then get LM Studio analysis
+            const content = formData.get('notes');
+            const name = formData.get('name');
+            
+            const analysisResponse = await fetch('api/lm_studio_service.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `content=${encodeURIComponent(content)}&name=${encodeURIComponent(name)}`
+            });
+            
+            const analysisData = await analysisResponse.json();
+            
+            if (!analysisData.success) {
+                throw new Error(analysisData.error);
+            }
+            
+            // Save the analysis
+            const aiUpdateResponse = await fetch('update_ai_analysis.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `name=${encodeURIComponent(name)}&ai_analysis=${encodeURIComponent(analysisData.analysis)}`
+            });
+            
+            if (!aiUpdateResponse.ok) {
+                throw new Error('Fehler beim Speichern der KI-Analyse');
+            }
+            
+            // Show success message and reload page
+            alert('Daten und KI-Analyse erfolgreich gespeichert!');
+            window.location.reload();
+            
+        } catch (error) {
+            console.error('Fehler:', error);
+            alert('Fehler: ' + error.message);
         }
     }
 
-    // Event Listener für Mausbewegung
-    document.addEventListener('mousemove', (e) => {
-        // Begrenzt die Stern-Erzeugung auf alle 100ms
-        if (!document.mouseMoveThrottle) {
-            document.mouseMoveThrottle = setTimeout(() => {
-                document.mouseMoveThrottle = null;
-                createStar(e);
-            }, 100);
+    async function getLMStudioAnalysis() {
+        // Hole den Namen aus dem Suchfeld oder verstecktem Input
+        const searchName = document.querySelector('input[name="search"]').value || 
+                          document.querySelector('input[name="name"]').value;
+        const content = document.querySelector('textarea[name="notes"]').value;
+        
+        // Hole die vorherige KI-Analyse aus der AI-JSON
+        const lastAiAnalysis = document.querySelector('.ai-feedback strong + br + span')?.textContent || '';
+
+        try {
+            const response = await fetch('api/lm_studio_service.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `content=${encodeURIComponent(content)}&name=${encodeURIComponent(searchName)}&previous_analysis=${encodeURIComponent(lastAiAnalysis)}`
+            });
+            
+            const data = await response.json();
+            if (data.success) {
+                document.querySelector('textarea[name="ai_analysis"]').value = data.analysis;
+                // Optional: Automatisch speichern
+                document.querySelector('form[action="update_ai_analysis.php"]').submit();
+            } else {
+                alert('Fehler bei der LM Studio Analyse: ' + data.error);
+            }
+        } catch (error) {
+            console.error('Fehler:', error);
+            alert('Verbindungsfehler zu LM Studio');
         }
-    });
+    }
     </script>
 </body>
 </html>

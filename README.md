@@ -21,40 +21,34 @@ Die App besteht aus einer PHP-basierten Webanwendung mit folgenden Features:
   - Name, Gewicht, Stimmung und detaillierte Tagesnotizen
   - Strukturierte Eingabefelder für bessere Analyse
   - Automatische Datenspeicherung pro Benutzer
+  - Kombinierter "Speichern + KI Analyse" Button
 
 - **KI-Integration** 🤖
-  - Fortschrittsanalyse durch ChatGPT
-  - Personalisierte Empfehlungen
-  - Verlaufsbasierte Einsichten
+  - Lokale KI-Analyse durch LM Studio Integration
+  - Verlaufsbasierte KI-Empfehlungen
+  - Strukturierte Analysen in Kategorien
   - Aufklappbare KI-Analysen mit Effekten
+  - Echtzeitanalyse beim Speichern möglich
 
 - **Benutzerfreundlichkeit** 🎨
-  - Modernes Interface mit Glasmorphismus-Design
-  - Dunkelmodus-Option
+  - Modernes Interface im Darkmode-Design
+  - Glasmorphismus-Effekte
   - Responsive Layout
   - Animierte UI-Elemente
+  - Verbesserte Lesbarkeit durch Kontraste
 
 - **Datenverwaltung** 💾
   - Separate JSON-Dateien pro Benutzer
   - Verlaufsansicht mit Filteroptionen
   - Kopier-Funktionen für Prompts und Daten
+  - Automatische Zeitstempel (Europa/Berlin)
 
-### Geplante Features 🔮
-- Diagramme zur Visualisierung 📊
-- Mobile App für iOS/Android 📱
-- Cloud-Synchronisation ☁️
-- Erinnerungsfunktion 🔔
-- Erweiterte KI-Analysen 🧠
-
-## Installation 🛠️
-
-### Voraussetzungen
+### Technische Voraussetzungen
 - **PHP 8.4+** 🐘
-- **Node.js & npm** 📦
-- **Electron** ⚡
+- **LM Studio** (lokal) 🧠
 - **Webbrowser** 🌐
 
-### Schnellstart
+### Installation
 
 1. **Repo klonen**
 ```bash
@@ -62,23 +56,21 @@ git clone https://github.com/yourusername/EvolvingMe.git
 cd EvolvingMe
 ```
 
-2. **PHP installieren**
-```bash
-# Windows (mit Scoop)
-scoop install php
+2. **LM Studio einrichten**
+- LM Studio installieren
+- Mistral-Nemo-Instruct Modell laden
+- API-Server auf Port 1234 starten
 
-# Oder manuell von php.net herunterladen
-```
-
-3. **Abhängigkeiten installieren**
+3. **PHP konfigurieren**
 ```bash
-cd my-maven-app/client/public
-npm install
+# Timezone auf Europe/Berlin setzen
+# curl Extension aktivieren
 ```
 
 4. **Anwendung starten**
 ```bash
-npm start
+cd my-maven-app/client/public
+php -S localhost:8000
 ```
 
 ## Nutzung 📱
@@ -86,12 +78,12 @@ npm start
 1. **Daten erfassen**
    - Name und Messwerte eingeben
    - Tagesnotizen strukturiert erfassen
-   - Speichern und Fortschritt verfolgen
+   - "Speichern + KI Analyse" für sofortige Auswertung
 
 2. **KI-Analyse**
-   - Nach Namen suchen
-   - "Prompt kopieren" für ChatGPT
-   - Analyse einfügen und speichern
+   - Automatische Analyse durch LM Studio
+   - Strukturierte Kategorien
+   - Verlaufsbasierte Empfehlungen
 
 3. **Fortschritt tracken**
    - Verlauf anzeigen

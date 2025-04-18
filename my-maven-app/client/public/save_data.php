@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Europe/Berlin');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dataDir = __DIR__ . '/data';
     $name = $_POST['name'] ?? '';
