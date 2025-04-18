@@ -1,112 +1,63 @@
-# EvolvingMe
+# EvolvingMe 🌱
 
-**EvolvingMe** ist eine innovative Anwendung, die dir dabei hilft, dich selbst zu entwickeln und deine Fortschritte in verschiedenen Lebensbereichen zu verfolgen. Egal ob Fitness, Psyche, Ernährung oder Verhalten – diese App wird dein persönlicher Begleiter auf dem Weg zu einem besseren Ich.
+**EvolvingMe** ist eine innovative Anwendung, die dir dabei hilft, dich selbst zu entwickeln und deine Fortschritte in verschiedenen Lebensbereichen zu verfolgen. Egal ob Fitness, Psyche, Ernährung oder Verhalten – diese App wird dein persönlicher Begleiter auf dem Weg zu einem besseren Ich. 🎯
 
-## Vision
+## Vision 🚀
 
 Die Vision von **EvolvingMe** ist es, eine zentrale Plattform zu schaffen, die alle Aspekte der persönlichen Entwicklung abdeckt. Die App soll dir helfen, deine Ziele zu setzen, Fortschritte zu dokumentieren und wertvolle Einblicke in dein Leben zu gewinnen. 
 
 In Zukunft wird die App folgende Bereiche unterstützen:
-- **Fitness**: Verfolge dein Gewicht, deine Workouts und deine körperliche Entwicklung.
-- **Psyche**: Dokumentiere deine Stimmung, reflektiere deine Gedanken und verbessere dein mentales Wohlbefinden.
-- **Ernährung**: Halte deine Mahlzeiten fest, plane deine Ernährung und analysiere deine Essgewohnheiten.
-- **Verhalten**: Beobachte deine täglichen Routinen, identifiziere Muster und arbeite an positiven Veränderungen.
+- **Fitness** 💪: Verfolge dein Gewicht, deine Workouts und deine körperliche Entwicklung.
+- **Psyche** 🧠: Dokumentiere deine Stimmung, reflektiere deine Gedanken und verbessere dein mentales Wohlbefinden.
+- **Ernährung** 🥗: Halte deine Mahlzeiten fest, plane deine Ernährung und analysiere deine Essgewohnheiten.
+- **Verhalten** 📝: Beobachte deine täglichen Routinen, identifiziere Muster und arbeite an positiven Veränderungen.
 
-## Aktueller Stand
+## Aktueller Stand 📊
 
 Derzeit besteht die Anwendung aus zwei Hauptkomponenten:
-1. **Server**: Ein Java-basierter Server, der die Daten verarbeitet und speichert.
-2. **Client**: Eine PHP- und JavaScript-basierte Webanwendung, die eine benutzerfreundliche Oberfläche bietet, um Daten einzugeben und Ergebnisse anzuzeigen.
+1. **Server** 🖥️: Ein Java-basierter Server, der die Daten verarbeitet und speichert.
+2. **Client** 🌐: Eine PHP- und JavaScript-basierte Webanwendung, die eine benutzerfreundliche Oberfläche bietet.
 
-## Features (Geplant und Aktuell)
+## Features (Geplant und Aktuell) ✨
 
 ### Aktuelle Features
-- Einfache Eingabe von Daten wie Gewicht und Stimmung.
-- Speicherung der Daten lokal in einer JSON-Datei im Projektverzeichnis.
-- Suche nach gespeicherten Daten basierend auf dem Namen.
-- Integration eines lokalen PHP-Servers für die Ausführung von PHP-Dateien.
-- Nutzung von Electron, um die Anwendung als Desktop-App auszuführen.
+- Einfache Eingabe von Daten wie Gewicht und Stimmung 📝
+- Speicherung der Daten lokal in einer JSON-Datei 💾
+- KI-Analyse deiner Fortschritte mit ChatGPT Integration 🤖
+- Benutzerfreundliche Suche nach Namen 🔍
+- Dunkles Design mit anpassbarem Hintergrund 🎨
+- Verlaufsanalyse mit vorherigen Einträgen 📈
 
 ### Geplante Features
-- Erweiterte Analyse-Tools für Fitness, Ernährung und Verhalten.
-- Integration von Diagrammen und Statistiken zur Visualisierung von Fortschritten.
-- Personalisierte Empfehlungen basierend auf deinen Daten.
-- Unterstützung für mehrere Benutzerprofile.
-- Mobile App-Version für iOS und Android.
+- Erweiterte KI-Analysen und Empfehlungen 🧠
+- Diagramme zur Visualisierung von Fortschritten 📊
+- Mobile App-Version für iOS und Android 📱
+- Cloud-Synchronisation ☁️
+- Erinnerungsfunktion 🔔
 
-## Installation
+## Installation 🛠️
 
 ### Voraussetzungen
-- **Node.js** (mit npm) für die Verwaltung von JavaScript-Abhängigkeiten.
-- **PHP 7.4+** für die Ausführung des PHP-Servers.
-- **Electron** für die Desktop-Anwendung.
-- **Maven** für die Verwaltung der Java-Abhängigkeiten des Servers.
-- **Java 17+** für den Server.
+- **Node.js** 📦 (mit npm) - [Download](https://nodejs.org/)
+- **PHP 8.4+** 🐘 - [Download](https://windows.php.net/download#php-8.4)
+- **Electron** ⚡ für die Desktop-Anwendung
+- **Java 17+** ☕ (optional für Server)
 
-### Schritte
+### PHP Installation (Windows) 🐘
 
-#### 1. Repository klonen
-```bash
-git clone https://github.com/username/EvolvingMe.git
-cd EvolvingMe
-```
+1. **Download PHP** 📥
+   - Gehe zu [windows.php.net/download#php-8.4](https://windows.php.net/download#php-8.4)
+   - Wähle "VS16 x64 Thread Safe" ZIP-Paket
+   - Lade die ZIP-Datei herunter
 
-#### 2. Client einrichten
-1. Navigiere in das Client-Verzeichnis:
+2. **PHP Einrichtung** 📂
    ```bash
-   cd my-maven-app/client/public
-   ```
-2. Installiere die benötigten Node.js-Abhängigkeiten:
-   ```bash
-   npm install
-   ```
-3. Stelle sicher, dass die Datei `package.json` einen `start`-Befehl enthält:
-   ```json
-   {
-     "scripts": {
-       "start": "electron ."
-     }
-   }
+   # Erstelle PHP-Ordner
+   mkdir C:\php
+   # Entpacke ZIP-Datei nach C:\php
    ```
 
-#### 3. PHP installieren
-1. Lade PHP von [https://windows.php.net/download/](https://windows.php.net/download/) herunter.
-2. Entpacke die ZIP-Datei in ein Verzeichnis, z. B. `C:\php`.
-3. Füge den PHP-Pfad zur Umgebungsvariable `PATH` hinzu:
-   - Öffne die **Systemsteuerung** > **System** > **Erweiterte Systemeinstellungen** > **Umgebungsvariablen**.
-   - Bearbeite die Variable `Path` und füge `C:\php` hinzu.
-4. Überprüfe die Installation:
-   ```bash
-   php -v
-   ```
-
-#### 4. Electron einrichten
-1. Installiere Electron global:
-   ```bash
-   npm install -g electron
-   ```
-
-#### 5. Anwendung starten
-1. Starte den PHP-Server:
-   ```bash
-   php -S localhost:8000
-   ```
-2. Starte die Electron-Anwendung:
-   ```bash
-   npm start
-   ```
-
-#### 6. Server einrichten (optional)
-1. Navigiere in das Server-Verzeichnis:
-   ```bash
-   cd my-maven-app/server
-   ```
-2. Installiere die Abhängigkeiten und starte den Server:
-   ```bash
-   mvn spring-boot:run
-   ```
-
-### Nutzung
+## Nutzung
 - Öffne die Electron-Anwendung.
 - Gib Daten wie Name, Gewicht und Stimmung ein und speichere sie.
 - Suche nach gespeicherten Daten basierend auf dem Namen.
